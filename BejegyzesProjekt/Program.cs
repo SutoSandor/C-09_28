@@ -89,6 +89,37 @@ namespace BejegyzesProjekt
             string tartalom = Console.ReadLine();
             valami.Add(new Bejegyzes(szerzo, tartalom));
         }
+        public static int Max(List<Bejegyzes> lista)
+        {
+            int max = lista[0].Likeok;
+            for (int i = 1; i < lista.Count; i++)
+            {
+                if (lista[0].Likeok > i)
+                {
+                    max = lista[i].Likeok;
+                }
+            }
+            return max;
+        }
+        public static void Eldontes(List<Bejegyzes> lista)
+        {
+            int max = lista[0].Likeok;
+            for (int i = 1; i < lista.Count; i++)
+            {
+                if (lista[0].Likeok > i)
+                {
+                    max = lista[i].Likeok;
+                }
+            }
+            if (max>35)
+            {
+                Console.WriteLine("Van olyan bejegyzés, ami 35 likenál többet kapott.");
+            }
+            else
+            {
+                Console.WriteLine("Nincs olyan bejegyzés, ami 35 likenál többet kapott.");
+            }
+        }
         static void Main(string[] args)
         {
             Console.WriteLine("Hány bejegyzést szeretne írni?");
@@ -109,6 +140,8 @@ namespace BejegyzesProjekt
             Console.WriteLine("A 2. bejegyzés módosítása: ");
             valami[1].Tartalom = Console.ReadLine();
             Console.WriteLine("A módosított tartalom: \t" +valami[1].Kiir());
+            Console.WriteLine("A legnépszerűbb bejegyzés likejainak száma: "+Max(valami));
+            Eldontes(valami);
             Console.ReadKey();
         }
     }
