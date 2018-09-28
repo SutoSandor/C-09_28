@@ -12,15 +12,15 @@ namespace BejegyzesProjekt
         {
             string szerzo;
             string tartalom;
-            int likeok = 0;
+            int likeok;
             DateTime letrejott = DateTime.Now;
             DateTime szerkesztve = DateTime.Now;
 
-            public Bejegyzes(string szerzo, string tartalom, int likeok, DateTime letrejott, DateTime szerkesztve)
+            public Bejegyzes(string szerzo, string tartalom)
             {
                 this.szerzo = szerzo;
                 this.tartalom = tartalom;
-                this.likeok = likeok;
+                this.likeok = 0;
                 this.letrejott = DateTime.Now;
                 this.szerkesztve = DateTime.Now;
             }
@@ -68,10 +68,19 @@ namespace BejegyzesProjekt
             {
                 return likeok++;
             }
+            public string Kiir()
+            {
+                string s = this.szerzo + " - " + this.likeok + " - " + this.letrejott;
+                s += "\nSzerkesztve: " + this.szerkesztve;
+                s += "\n"+this.tartalom;
+                return s;
+            }
         }
         static void Main(string[] args)
         {
-            
+            Bejegyzes elso = new Bejegyzes("Lakatos Rajmund", "Ej mi a kő! tyúkanyó, kend\nA szobában lakik itt bent ?\nLám, csak jó az isten, jót ád,\nHogy fölvitte a kend dolgát!");
+            Console.WriteLine(elso.Kiir());
+            Console.ReadKey();
         }
     }
 }
