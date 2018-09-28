@@ -6,87 +6,108 @@ using System.Threading.Tasks;
 
 namespace BejegyzesProjekt
 {
-    class Program
+    class Bejegyzes
     {
-        class Bejegyzes
-        {
-            string szerzo;
-            string tartalom;
-            int likeok;
-            DateTime letrejott = DateTime.Now;
-            DateTime szerkesztve = DateTime.Now;
+        string szerzo;
+        string tartalom;
+        int likeok;
+        DateTime letrejott = DateTime.Now;
+        DateTime szerkesztve = DateTime.Now;
 
-            public Bejegyzes(string szerzo, string tartalom)
+        public Bejegyzes(string szerzo, string tartalom)
+        {
+            this.szerzo = szerzo;
+            this.tartalom = tartalom;
+            this.likeok = 0;
+            this.letrejott = DateTime.Now;
+            this.szerkesztve = this.letrejott;
+        }
+        public string Szerzo
+        {
+            get
             {
-                this.szerzo = szerzo;
-                this.tartalom = tartalom;
-                this.likeok = 0;
-                this.letrejott = DateTime.Now;
+                return szerzo;
+            }
+        }
+        public string Tartalom
+        {
+            get
+            {
+                return tartalom;
+            }
+            set
+            {
+                this.tartalom = value;
                 this.szerkesztve = DateTime.Now;
             }
-            public string Szerzo
+        }
+        public int Likeok
+        {
+            get
             {
-                get
-                {
-                    return szerzo;
-                }
+                return likeok;
             }
-            public string Tartalom
+        }
+        public DateTime Letrejott
+        {
+            get
             {
-                get
-                {
-                    return tartalom;
-                }
-                set
-                {
-                    this.tartalom = value;
-                    this.szerkesztve = DateTime.Now;
-                }
+                return letrejott;
             }
-            public int Likeok
+        }
+        public DateTime Szerkesztve
+        {
+            get
             {
-                get
-                {
-                    return likeok;
-                }
+                return szerkesztve;
             }
-            public DateTime Letrejott
+        }
+        public void Like()
+        {
+            likeok++;
+        }
+        public string Kiir()
+        {
+            string s = this.szerzo + " - " + this.likeok + " - " + this.letrejott;
+            if (this.szerkesztve != this.letrejott)
             {
-                get
-                {
-                    return letrejott;
-                }
-            }
-            public DateTime Szerkesztve
-            {
-                get
-                {
-                    return szerkesztve;
-                }
-            }
-            public int Like(int likeok)
-            {
-                return likeok++;
-            }
-            public string Kiir()
-            {
-                string s = this.szerzo + " - " + this.likeok + " - " + this.letrejott;
                 s += "\nSzerkesztve: " + this.szerkesztve;
-                s += "\n"+this.tartalom;
-                return s;
             }
+            s += "\n" + this.tartalom;
+            return s;
+        }
+    }
+    class Program
+    {
+        public static Random rnd = new Random();
+        public static List<Bejegyzes> valami = new List<Bejegyzes>();
+        public static void ujbejegyzes()
+        {
+            Console.WriteLine("Szerző: ");
+            string szerzo = Console.ReadLine();
+            Console.WriteLine("Tartalom: ");
+            string tartalom = Console.ReadLine();
+            valami.Add(new Bejegyzes(szerzo, tartalom));
         }
         static void Main(string[] args)
         {
-            Bejegyzes elso = new Bejegyzes("Lakatos Rajmund", "Ej mi a kő! tyúkanyó, kend\nA szobában lakik itt bent ?\nLám, csak jó az isten, jót ád,\nHogy fölvitte a kend dolgát!");
-            Console.WriteLine(elso.Kiir());
-            List<Bejegyzes> lista = new List<Bejegyzes>();
-            lista.Add(new Bejegyzes("Első bejegyzés","1. bejegyz"));
-            lista.Add(new Bejegyzes("Második bejegyzés", "2. bejegyz"));
-            foreach (var i in lista)
+            Console.WriteLine("Hány bejegyzést szeretne írni?");
+            int N = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < N; i++)
             {
-                Console.WriteLine(i);
+                ujbejegyzes();
             }
+            for (int i = 0; i < valami.Count * 20; i++)
+            {
+                valami[rnd.Next(0, valami.Count)].Like();
+
+            }
+            foreach (var i in valami)
+            {
+                Console.WriteLine(i.Kiir());
+            }
+            Console.WriteLine("A 2. bejegyzés módosítása: ");
+            
             Console.ReadKey();
         }
     }
