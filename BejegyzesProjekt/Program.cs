@@ -80,6 +80,13 @@ namespace BejegyzesProjekt
         {
             Bejegyzes elso = new Bejegyzes("Lakatos Rajmund", "Ej mi a kő! tyúkanyó, kend\nA szobában lakik itt bent ?\nLám, csak jó az isten, jót ád,\nHogy fölvitte a kend dolgát!");
             Console.WriteLine(elso.Kiir());
+            List<Bejegyzes> lista = new List<Bejegyzes>();
+            lista.Add(new Bejegyzes("Első bejegyzés","1. bejegyz"));
+            lista.Add(new Bejegyzes("Második bejegyzés", "2. bejegyz"));
+            foreach (var i in lista)
+            {
+                Console.WriteLine(i);
+            }
             Console.ReadKey();
         }
     }
