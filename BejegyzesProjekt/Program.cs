@@ -69,11 +69,11 @@ namespace BejegyzesProjekt
         public string Kiir()
         {
             string s = this.szerzo + " - " + this.likeok + " - " + this.letrejott;
+            s += "\n" + this.tartalom;
             if (this.szerkesztve != this.letrejott)
             {
                 s += "\nSzerkesztve: " + this.szerkesztve;
             }
-            s += "\n" + this.tartalom;
             return s;
         }
     }
@@ -107,7 +107,8 @@ namespace BejegyzesProjekt
                 Console.WriteLine(i.Kiir());
             }
             Console.WriteLine("A 2. bejegyzés módosítása: ");
-            
+            valami[1].Tartalom = Console.ReadLine();
+            Console.WriteLine("A módosított tartalom: \t" +valami[1].Kiir());
             Console.ReadKey();
         }
     }
